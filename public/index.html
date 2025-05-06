@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div id="auth-container" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="register">Register</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" name="email" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#" id="show-register">Register</a>
+                </p>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label for="register-name">Name</label>
+                    <input type="text" id="register-name" name="name" required autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" name="email" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" name="password" required autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="register-age">Age</label>
+                    <input type="number" id="register-age" name="age" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-gender">Gender</label>
+                    <select id="register-gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="register-height">Height (cm)</label>
+                    <input type="number" id="register-height" name="height" min="100" max="250" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-weight">Weight (kg)</label>
+                    <input type="number" id="register-weight" name="weight" min="20" max="300" step="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-activity">Activity Level</label>
+                    <select id="register-activity" name="activity_level" required>
+                        <option value="">Select Activity Level</option>
+                        <option value="sedentary">Sedentary</option>
+                        <option value="light">Light</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="active">Active</option>
+                        <option value="very_active">Very Active</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" id="show-login">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="main-container" class="main-container" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2>Fitness App</h2>
+            </div>
+            <nav class="nav-links">
+                <ul>
+                    <li data-section="dashboard"><a href="#">Dashboard</a></li>
+                    <li data-section="health"><a href="#">Health</a></li>
+                    <li data-section="fitness"><a href="#">Fitness</a></li>
+                    <li data-section="water"><a href="#">Water</a></li>
+                    <li data-section="goals"><a href="#">Goals</a></li>
+                    <li data-section="nutrition"><a href="#">Nutrition</a></li>
+                    <li data-section="profile"><a href="#">Profile</a></li>
+                    <li id="logout"><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <div id="dashboard-section" class="section">
+                <h2>Dashboard</h2>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Health Summary</h3>
+                        <div id="health-summary"></div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Fitness Summary</h3>
+                        <div id="fitness-summary"></div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Water Intake</h3>
+                        <div id="water-summary"></div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Goals Progress</h3>
+                        <div id="goals-summary"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health Section -->
+            <div id="health-section" class="section">
+                <h2>Health Tracking</h2>
+                <form id="health-form">
+                    <h3>Required Fields</h3>
+                    <input type="number" name="weight" placeholder="Weight (kg)" required>
+                    <input type="number" name="height" placeholder="Height (cm)" required>
+                    <input type="number" name="heart_rate" placeholder="Heart Rate (bpm)" required>
+                    <input type="number" name="sleep_hours" placeholder="Sleep Hours" required min="0" max="24" step="0.5">
+                    <select name="stress_level" required>
+                        <option value="">Stress Level</option>
+                        <option value="1">Very Low</option>
+                        <option value="2">Low</option>
+                        <option value="3">Moderate</option>
+                        <option value="4">High</option>
+                        <option value="5">Very High</option>
+                    </select>
+
+                    <h3>Optional Fields</h3>
+                    <div class="optional-fields">
+                        <input type="number" name="blood_pressure_systolic" placeholder="Blood Pressure (Systolic)">
+                        <input type="number" name="blood_pressure_diastolic" placeholder="Blood Pressure (Diastolic)">
+                        <input type="number" name="blood_sugar" placeholder="Blood Sugar" step="0.1">
+                    </div>
+
+                    <button type="submit">Save Health Data</button>
+                </form>
+                <div id="health-history">
+                    <table id="health-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Weight</th>
+                                <th>Height</th>
+                                <th>BMI</th>
+                                <th>Heart Rate</th>
+                                <th>Sleep</th>
+                                <th>Stress</th>
+                                <th>Optional Data</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Fitness Section -->
+            <div id="fitness-section" class="section">
+                <h2>Fitness Tracking</h2>
+                <form id="fitness-form">
+                    <select name="workoutType" required>
+                        <option value="">Select Workout Type</option>
+                        <option value="running">Running</option>
+                        <option value="cycling">Cycling</option>
+                        <option value="swimming">Swimming</option>
+                        <option value="walking">Walking</option>
+                        <option value="yoga">Yoga</option>
+                        <option value="strength">Strength Training</option>
+                        <option value="hiit">HIIT</option>
+                        <option value="pilates">Pilates</option>
+                        <option value="dancing">Dancing</option>
+                        <option value="sports">Sports</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="number" name="duration" placeholder="Duration (minutes)" required>
+                    <input type="number" name="calories" placeholder="Calories Burned" required>
+                    <select name="intensity" required>
+                        <option value="">Intensity Level</option>
+                        <option value="low">Low</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="high">High</option>
+                    </select>
+                    <textarea name="notes" placeholder="Additional notes (optional)"></textarea>
+                    <button type="submit">Save Workout</button>
+                </form>
+                <div id="fitness-history">
+                    <table id="fitness-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Workout Type</th>
+                                <th>Duration</th>
+                                <th>Calories</th>
+                                <th>Intensity</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Water Section -->
+            <div id="water-section" class="section">
+                <h2>Water Intake</h2>
+                <form id="water-form">
+                    <input type="number" name="amount" placeholder="Amount (ml)" required>
+                    <button type="submit">Add Water</button>
+                </form>
+                <div class="water-progress">
+                    <div class="progress-bar">
+                        <div id="water-progress" class="progress"></div>
+                    </div>
+                    <p>Daily Goal: 2000ml</p>
+                </div>
+                <div id="water-history">
+                    <table id="water-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Goals Section -->
+            <section id="goals-section" class="section">
+                <h2>Goals</h2>
+                <div class="goals-container">
+                    <div class="goals-form">
+                        <h3>Set New Goal</h3>
+                        <form id="goal-form" class="goals-form">
+                            <div class="form-group">
+                                <label for="type">Goal Type</label>
+                                <select name="type" required>
+                                    <option value="">Select Goal Type</option>
+                                    <option value="weight">Weight Loss/Gain</option>
+                                    <option value="workout">Workout Duration</option>
+                                    <option value="water">Water Intake</option>
+                                    <option value="steps">Daily Steps</option>
+                                    <option value="sleep">Sleep Hours</option>
+                                    <option value="meditation">Meditation Minutes</option>
+                                    <option value="calories">Calorie Intake</option>
+                                    <option value="running">Running Distance</option>
+                                    <option value="cycling">Cycling Distance</option>
+                                    <option value="swimming">Swimming Distance</option>
+                                    <option value="yoga">Yoga Sessions</option>
+                                    <option value="strength">Strength Training</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="target">Target Value</label>
+                                <input type="number" name="target" min="0" step="0.1" required>
+                                <small class="unit-display">Select goal type to see unit</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="start_date">Start Date</label>
+                                <input type="date" name="start_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="end_date">Target Date</label>
+                                <input type="date" name="end_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="purpose">Purpose</label>
+                                <input type="text" name="purpose" placeholder="Why this goal is important to you" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" placeholder="Additional details about your goal"></textarea>
+                            </div>
+                            <button type="submit">Set Goal</button>
+                        </form>
+                    </div>
+                    <div class="goals-display">
+                        <div class="goals-tabs">
+                            <button class="tab-btn active" data-tab="active">Active Goals</button>
+                            <button class="tab-btn" data-tab="completed">Completed Goals</button>
+                        </div>
+                        <div id="active-goals" class="goals-tab-content active">
+                            <h3>Active Goals</h3>
+                            <div class="goals-grid"></div>
+                        </div>
+                        <div id="completed-goals" class="goals-tab-content">
+                            <h3>Completed Goals</h3>
+                            <div class="goals-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <div id="profile-section" class="section">
+                <h2>Profile</h2>
+                <div class="profile-container">
+                    <div class="profile-display">
+                        <h3>Your Profile</h3>
+                        <div class="profile-info">
+                            <p><strong>Name:</strong> <span id="profile-name">-</span></p>
+                            <p><strong>Email:</strong> <span id="profile-email">-</span></p>
+                            <p><strong>Height:</strong> <span id="profile-height">-</span></p>
+                            <p><strong>Weight:</strong> <span id="profile-weight">-</span></p>
+                            <p><strong>Activity Level:</strong> <span id="profile-activity">-</span></p>
+                        </div>
+                    </div>
+                    <form id="profile-form" class="profile-form">
+                        <h3>Update Profile</h3>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="1" max="120" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" name="height" min="100" max="250" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="weight" min="20" max="300" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity_level">Activity Level</label>
+                            <select id="activity_level" name="activity_level" required>
+                                <option value="">Select Activity Level</option>
+                                <option value="sedentary">Sedentary</option>
+                                <option value="light">Light</option>
+                                <option value="moderate">Moderate</option>
+                                <option value="active">Active</option>
+                                <option value="very_active">Very Active</option>
+                            </select>
+                        </div>
+                        <button type="submit">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Nutrition Section -->
+            <div id="nutrition-section" class="section">
+                <h2>Nutrition</h2>
+                <div class="nutrition-container">
+                    <!-- Category Filters -->
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-category="all">All</button>
+                        <button class="filter-btn" data-category="fruits">Fruits</button>
+                        <button class="filter-btn" data-category="vegetables">Vegetables</button>
+                        <button class="filter-btn" data-category="grains">Grains</button>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <input type="text" id="nutrition-search" placeholder="Search food items..." class="search-input">
+                    </div>
+
+                    <!-- Food Items Grid -->
+                    <div class="food-grid" id="food-grid">
+                        <!-- Food items will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
